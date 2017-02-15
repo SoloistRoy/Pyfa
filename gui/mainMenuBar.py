@@ -82,7 +82,7 @@ class MainMenuBar(wx.MenuBar):
         # editMenu.Append(wx.ID_UNDO)
         # editMenu.Append(wx.ID_REDO)
 
-        editMenu.Append(wx.ID_COPY, "To Clipboard\tCTRL+C", "Export a fit to the clipboard")
+        editMenu.Append(self.mainFrame.exportFitId, "To Clipboard", "Export a fit to the clipboard")
         editMenu.Append(wx.ID_PASTE, "From Clipboard\tCTRL+V", "Import a fit from the clipboard")
         editMenu.AppendSeparator()
         editMenu.Append(self.saveCharId, "Save Character")
@@ -164,7 +164,7 @@ class MainMenuBar(wx.MenuBar):
     def fitChanged(self, event):
         enable = event.fitID is not None
         self.Enable(wx.ID_SAVEAS, enable)
-        self.Enable(wx.ID_COPY, enable)
+        self.Enable(self.mainFrame.exportFitId, enable)
         self.Enable(self.exportSkillsNeededId, enable)
 
         sChar = Character.getInstance()

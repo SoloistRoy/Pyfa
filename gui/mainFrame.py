@@ -212,6 +212,7 @@ class MainFrame(wx.Frame):
         # Add menu
         self.addPageId = wx.NewId()
         self.closePageId = wx.NewId()
+        self.exportFitId = wx.NewId()
 
         self.widgetInspectMenuID = wx.NewId()
         self.SetMenuBar(MainMenuBar(self))
@@ -519,13 +520,14 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_MENU, self.toggleOverrides, id=menuBar.toggleOverridesId)
 
         # Clipboard exports
-        self.Bind(wx.EVT_MENU, self.exportToClipboard, id=wx.ID_COPY)
+        self.Bind(wx.EVT_MENU, self.exportToClipboard, id=self.exportFitId)
 
         # Graphs
         self.Bind(wx.EVT_MENU, self.openGraphFrame, id=menuBar.graphFrameId)
 
         toggleSearchBoxId = wx.NewId()
         toggleShipMarketId = wx.NewId()
+
         ctabnext = wx.NewId()
         ctabprev = wx.NewId()
 
@@ -539,6 +541,9 @@ class MainFrame(wx.Frame):
 
         actb = [(wx.ACCEL_CTRL, ord('T'), self.addPageId),
                 (wx.ACCEL_CMD, ord('T'), self.addPageId),
+
+                (wx.ACCEL_CTRL, ord('C'), self.exportFitId),
+                (wx.ACCEL_CMD, ord('C'), self.exportFitId),
 
                 (wx.ACCEL_CTRL, ord('F'), toggleSearchBoxId),
                 (wx.ACCEL_CMD, ord('F'), toggleSearchBoxId),
