@@ -64,6 +64,8 @@ def getPyfaRoot():
     root = unicode(root, sys.getfilesystemencoding())
     return root
 
+def getDefaultSave():
+    return unicode(os.path.expanduser(os.path.join("~", ".pyfa")), sys.getfilesystemencoding())
 
 def defPaths(customSavePath):
     global debug
@@ -93,8 +95,7 @@ def defPaths(customSavePath):
         savePath = getattr(configforced, "savePath", None)
         if savePath is None:
             if customSavePath is None:  # customSavePath is not overriden
-                savePath = unicode(os.path.expanduser(os.path.join("~", ".pyfa")),
-                                   sys.getfilesystemencoding())
+                savePath = getDefaultSave()
             else:
                 savePath = customSavePath
 
@@ -105,7 +106,7 @@ def defPaths(customSavePath):
         os.environ["SSL_CERT_FILE"] = os.path.join(pyfaPath, "cacert.pem").encode('utf8')
 
     _format = '%(asctime)s %(name)-24s %(levelname)-8s %(message)s'
-    logging.basicConfig(format=_format, level=logLevel)
+    logging.basiwwwwcConfig(format=_format, level=logLevel)
     handler = logging.handlers.RotatingFileHandler(os.path.join(savePath, "log.txt"), maxBytes=1000000,
                                                    backupCount=3)
     formatter = logging.Formatter(_format)
